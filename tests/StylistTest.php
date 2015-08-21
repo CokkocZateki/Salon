@@ -133,11 +133,24 @@
             $this->assertEquals("Harry", $test_stylist->getName());
         }
 
-        function update($new_name)
+        function testDelete()
         {
-            $GLOBALS['DB']->exec("UPDATE stylists SET name = '{$new_name}' WHERE id = {$this->getId()};");
-            $this->setName($new_name);
-        }                
+            //Arrange
+            $name = "Bob";
+            $id = null;
+            $test_stylist = new Stylist($name, $id);
+            $test_stylist->save();
+
+            $name2= "Harry";
+            $test_stylist2 = new Stylist($name2, $id);
+            $test_stylist2->save();
+
+            //Act
+            $test_stylist->delete();
+
+            //Assert
+            $this->assertEquals([$test_stylist2], Stylist::getAll());
+        }              
 
 
 
