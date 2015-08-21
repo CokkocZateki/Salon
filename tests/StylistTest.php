@@ -97,7 +97,49 @@
 
             //Assert
             $this->assertEquals($test_stylist, $result[0]);
+        }
+
+        function test_find()
+        {
+            //Arrange
+            $name = "Bob";
+            $name2 = "Harry";
+            $test_stylist = new Stylist($name);
+            $test_stylist->save();
+            $test_stylist2 = new Stylist($name2);
+            $test_stylist2->save();
+
+            //Act
+            $result = Stylist::find($test_stylist->getId());
+
+            //Assert
+            $this->assertEquals($test_stylist, $result);
+        }
+
+        function testUpdate()
+        {
+            //Arrange
+            $name = "Bob";
+            $id = null;
+            $test_stylist = new Stylist($name, $id);
+            $test_stylist->save();
+
+            $new_name = "Harry";
+
+            //Act
+            $test_stylist->update($new_name);
+
+            //Assert
+            $this->assertEquals("Harry", $test_stylist->getName());
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE stylists SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
         }                
+
+
 
 
 
