@@ -49,6 +49,26 @@
             $this->assertEquals(true, is_numeric($result));
         }
 
+        function testDeleteAll()
+        {
+            //Arrange
+            $name = "Bob";
+            $name2 = "Harry";
+            $test_stylist = new Stylist($name);
+            $test_stylist->save();
+            $test_stylist2 = new Stylist($name2);
+            $test_stylist2->save();
+
+            //Act
+            Stylist::deleteAll();
+            $result = Stylist::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
+
+
+
     }
 
 

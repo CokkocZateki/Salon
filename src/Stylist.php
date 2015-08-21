@@ -30,6 +30,28 @@
             return $this->name;
         }
 
+        function save()
+        {
+          $GLOBALS['DB']->exec("INSERT INTO stylists (name) VALUES ('{$this->getName()}')");
+          $result_id = $GLOBALS['DB']->lastInsertId();
+          $this->setId($result_id);
+        }
+
+        static function getAll()
+        {
+          $returned_stylists = $GLOBALS['DB']->query("SELECT * FROM stylists;");
+          $stylists = array();
+          foreach ($returned_stylists as $stylist) {
+              $name = $stylist['name'];
+              $id = $stylist['id'];
+              $new_stylist = new Stylist($name, $id);
+              array_push($stylists, $new_stylist);
+          }
+
+          return $stylists;
+        }
+
+
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM stylists;");
