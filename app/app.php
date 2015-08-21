@@ -90,18 +90,18 @@
     });
 
     $app->patch("/stylists/{id}/edit", function($id) use ($app) {
-        $name = $_POST['name'];
+        $name = preg_quote($_POST['name'], "'");
         $stylist = Stylist::find($id);
         $stylist->update($name);
         return $app['twig']->render('stylist_edit.html.twig',
         array('stylist' => $stylist, 'clients' => $stylist->getClients()));
     });
 
-    $app->patch("/client/{id}", function($id) use ($app) {
+    $app->patch("/clients/{id}/edit", function($id) use ($app) {
         $name = preg_quote($_POST['client_name'], "'");
         $client = Client::find($id);
-        echo "Name: " . $name . "   Id: " . $id . "   ";
-        var_dump($client);
+        // echo "Name: " . $name . "   Id: " . $id . "   ";
+        // var_dump($client);
         $client->update($name);
         return $app['twig']->render('client_edit.html.twig',
         array('client' => Client::find($id)));

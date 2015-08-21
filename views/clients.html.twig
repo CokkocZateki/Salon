@@ -31,13 +31,6 @@
                     <br/>
                 </form>
 
-                <form action="/stylists/{{ stylist.getId }}/edit" method="post">
-                    <input name="_method" type="hidden" value="patch">
-                    <label for="name">Rename your Stylist:</label><br>
-                    <input id="name" name="name" type="text" required>
-                    <button class="btn-default" type="submit">Update {{stylist.getName}}</button>
-                </form>
-
                 <form action="/delete_clients" method="post">
                     <button class="btn-danger" type="submit">Delete Clients</button>
                 </form>

@@ -19,6 +19,11 @@
             return $this->id;
         }
 
+        function getClientId()
+        {
+            return $this->id;
+        }
+
         function getStylistId()
         {
             return $this->stylist_id;
@@ -72,8 +77,9 @@
 
         function update($new_name)
         {
-            // echo "Name: " . $new_name;
-            $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $id = (int)$this->getClientId();
+            //echo "Id is: " . $id;
+            $GLOBALS['DB']->exec("UPDATE clients SET client_name = '{$new_name}' WHERE id = {$id};");
             $this->setName($new_name);
         }
 
