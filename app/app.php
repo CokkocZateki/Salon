@@ -127,6 +127,7 @@
     });
 
     $app->post("/delete_clients", function() use ($app) {
+        // echo "ID is: " . $id . "  ";
         Client::deleteAll();
         return $app['twig']->render('delete_clients.html.twig');
     });

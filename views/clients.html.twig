@@ -32,6 +32,7 @@
                 </form>
 
                 <form action="/delete_clients" method="post">
+                    <input id='stylist_id' name='stylist_id' type='hidden' value='{{ stylist.getId() }}'>
                     <button class="btn-danger" type="submit">Delete Clients</button>
                 </form>
 
