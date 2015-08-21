@@ -98,11 +98,9 @@
 
             //Act
             $test_client->save();
-            // var_dump($test_client);
 
             //Assert
             $result = Client::getAll();
-            // var_dump($result);
             $this->assertEquals($test_client, $result[0]);
         }
 

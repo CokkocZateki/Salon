@@ -54,8 +54,6 @@
                 $client_name = $client['client_name'];
                 $stylist_id = $client['stylist_id'];
                 $id = $client['id'];
-
-                //var_dump($id);
                 $new_client = new Client($client_name, $stylist_id, $id);
                 array_push($clients, $new_client);
             }
@@ -78,7 +76,6 @@
         function update($new_name)
         {
             $id = (int)$this->getClientId();
-            //echo "Id is: " . $id;
             $GLOBALS['DB']->exec("UPDATE clients SET client_name = '{$new_name}' WHERE id = {$id};");
             $this->setName($new_name);
         }
