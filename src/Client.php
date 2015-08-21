@@ -70,10 +70,21 @@
             return $found_client;
         }
 
+        function update($new_name)
+        {
+            // echo "Name: " . $new_name;
+            $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+        }
 
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM clients;");
+        }
+
+        static function deleteClients()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM clients WHERE stylist_id = {$this->getStylistID()};");
         }
 
 
