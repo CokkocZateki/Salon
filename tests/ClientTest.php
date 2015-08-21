@@ -135,7 +135,30 @@
             $this->assertEquals([], $result);
         }
 
+        function testFind()
+        {
+            //Arrange
+            $name = "Bob";
+            $id = null;
+            $test_stylist = new Stylist($name, $id);
+            $test_stylist->save();
 
+            $stylist_id = $test_stylist->getId();
+
+            $client_name = "Berta";
+            $test_client = new Client($client_name, $stylist_id, $id);
+            $test_client->save();
+
+            $client_name2 = "Gertrude";
+            $test_client2 = new Client($client_name2, $stylist_id, $id);
+            $test_client2->save();
+
+            //Act
+            $result = Client::find($test_client->getId());
+
+            //Assert
+            $this->assertEquals($test_client, $result);
+        }
 
 
     }
