@@ -80,9 +80,35 @@
 
             //Assert
             $result = Client::getAll();
-            // var_dump($result); 
+            // var_dump($result);
             $this->assertEquals($test_client, $result[0]);
         }
+
+        function testGetAll()
+        {
+            //Arrange
+            $name = "Bob";
+            $id = null;
+            $test_stylist = new Stylist($name, $id);
+            $test_stylist->save();
+
+            $stylist_id = $test_stylist->getId();
+
+            $client_name = "Berta";
+            $test_client = new Client($client_name, $stylist_id, $id);
+            $test_client->save();
+
+            $client_name2 = "Gertrude";
+            $test_client2 = new Client($client_name2, $stylist_id, $id);
+            $test_client2->save();
+
+            //Act
+            $result = Client::getAll();
+
+            //Assert
+            $this->assertEquals([$test_client, $test_client2], $result);
+        }
+
 
 
 
